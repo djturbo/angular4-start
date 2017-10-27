@@ -19,7 +19,8 @@ api.get('/messages', (req, res) => {
 
 api.post('/message', (req, res) => {
     messages.push(req.body);
-    res.sendStatus(200);
+    //res.writeHead({'Content-Type': 'application/json'});
+    res.status(200).json({result: messages});
 })
 
 app.use('/api', api);

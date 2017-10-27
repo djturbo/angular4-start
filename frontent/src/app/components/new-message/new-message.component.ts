@@ -8,8 +8,7 @@ import { WebService } from '../../services/web.service';
   styleUrls: ['./new-message.component.scss']
 })
 export class NewMessageComponent implements OnInit {
-  @Output() 
-  onPosted = new EventEmitter();
+  @Output() onPosted : EventEmitter<any> = new EventEmitter();
 
   constructor(private webService : WebService) { }
   TAG = 'NewMessageComponent';
@@ -25,11 +24,11 @@ export class NewMessageComponent implements OnInit {
     console.log(this.message.owner, " ", this.message.text);
     this.webService.postMessage(this.message, this.onSuccessPostMessage, this.onErrorPostMessage);
   }
-  onSuccessPostMessage(data){
+  private onSuccessPostMessage = (data) => {
     console.log('NewMessageComponent :: onSuccessPostMessage: ',data)
     this.onPosted.emit(this.message);
   }
-  onErrorPostMessage(error){
+  private onErrorPostMessage = (error) =>{
     console.log('NewMessageComponent :: onErrorPostMessage: ',error)
   }
 }
