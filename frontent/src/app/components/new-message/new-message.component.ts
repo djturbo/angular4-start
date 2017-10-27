@@ -13,4 +13,12 @@ export class NewMessageComponent implements OnInit {
   ngOnInit() {
   }
 
+  owner = "test"; 
+  message = {
+    owner: "",
+    text: ""
+  }
+  post(){
+    console.log(this.message.owner, " ", this.message.text);
+  }
 }

@@ -2,13 +2,13 @@
   <mat-card>
     <mat-card-content>
       <mat-input-container>
-        <input matInput placeholder="Name" />
+        <input matInput [(ngModel)]="message.owner}} placeholder="Name" >
       </mat-input-container>
       <mat-input-container>
-          <textarea matInput placeholder="Message" ></textarea>
+          <textarea matInput placeholder="Message" [(ngModel)]="message.text"></textarea>
         </mat-input-container>
         <mat-card-actions>
-          <button mat-button color="primary">POST</button>
+          <button (click)="post()" mat-button color="primary">POST</button>
         </mat-card-actions>
     </mat-card-content>
   </mat-card>

@@ -8,6 +8,8 @@ import {
   MatMenuModule, 
   MatCardModule,
   MatIconModule} from '@angular/material';
+
+import { FormsModule } from '@angular/forms'
 import { HttpClientModule } from '@angular/common/http';
 import { WebService } from './services/web.service';
 import { AppComponent } from './app.component';
@@ -28,7 +30,8 @@ import { NewMessageComponent } from './components/new-message/new-message.compon
     MatMenuModule, 
     MatCardModule, 
     MatIconModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [ WebService ],
   bootstrap: [AppComponent]

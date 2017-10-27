@@ -42,3 +42,4 @@ testem.log
 Thumbs.db
 yarn.lock
 backend/node_modules
+frontent/node_modules
