@@ -1,15 +1,15 @@
 <div class="new-message-component">
   <mat-card>
     <mat-card-content>
-      <mat-input-container>
-        <input mat-input [(ngModel)]="message.owner" placeholder="Name" />
-      </mat-input-container>
-      <mat-input-container>
-          <textarea mat-input placeholder="Message" [(ngModel)]="message.text"></textarea>
-        </mat-input-container>
-        <mat-card-actions>
-          <button (click)="post()" mat-button color="primary">POST</button>
-        </mat-card-actions>
+      <mat-form-field>
+        <input matInput [(ngModel)]="message.owner" placeholder="Name" />
+      </mat-form-field>
+      <mat-form-field>
+        <textarea matInput placeholder="Message" [(ngModel)]="message.text"></textarea>
+      </mat-form-field>
+      <mat-card-actions>
+        <button (click)="post()" mat-button color="primary">POST</button>
+      </mat-card-actions>
     </mat-card-content>
   </mat-card>
 </div>

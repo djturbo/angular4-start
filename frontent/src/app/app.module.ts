@@ -7,7 +7,8 @@ import {
   MatCheckboxModule, 
   MatMenuModule, 
   MatCardModule,
-  MatIconModule} from '@angular/material';
+  MatIconModule,
+  MatInputModule} from '@angular/material';
 
 import { FormsModule } from '@angular/forms'
 import { HttpClientModule } from '@angular/common/http';
@@ -31,7 +32,8 @@ import { NewMessageComponent } from './components/new-message/new-message.compon
     MatCardModule, 
     MatIconModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    MatInputModule
   ],
   providers: [ WebService ],
   bootstrap: [AppComponent]
