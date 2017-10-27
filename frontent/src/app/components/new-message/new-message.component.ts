@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter} from '@angular/core';
+
 import { WebService } from '../../services/web.service';
 
 @Component({
@@ -7,9 +8,11 @@ import { WebService } from '../../services/web.service';
   styleUrls: ['./new-message.component.scss']
 })
 export class NewMessageComponent implements OnInit {
+  @Output() 
+  onPosted = new EventEmitter();
 
   constructor(private webService : WebService) { }
-
+  TAG = 'NewMessageComponent';
   ngOnInit() {
   }
 
@@ -20,5 +23,13 @@ export class NewMessageComponent implements OnInit {
   }
   post(){
     console.log(this.message.owner, " ", this.message.text);
+    this.webService.postMessage(this.message, this.onSuccessPostMessage, this.onErrorPostMessage);
+  }
+  onSuccessPostMessage(data){
+    console.log('NewMessageComponent :: onSuccessPostMessage: ',data)
+    this.onPosted.emit(this.message);
+  }
+  onErrorPostMessage(error){
+    console.log('NewMessageComponent :: onErrorPostMessage: ',error)
   }
 }

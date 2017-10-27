@@ -7,6 +7,7 @@ import { WebService } from '../../services/web.service';
 })
 export class MessageBoardComponent implements OnInit {
 
+ 
   constructor(private webService: WebService) { }
 
   async ngOnInit() {
