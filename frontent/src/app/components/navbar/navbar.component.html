@@ -1,0 +1,15 @@
+<mat-toolbar role="toolbar" aria-label="FJAC" color="primary">
+  <button mat-button routerLink="/">
+    <mat-icon>home</mat-icon>
+    {{title}}</button>
+
+  <!-- This fills the remaining space of the current row -->
+  <span class="fill-remaining-space"></span>
+  <button mat-button [mat-menu-trigger-for]="menu" fxHide="false" fxHide.gt-sm>
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item routerLink="/messages">Messages</button>
+    <button mat-menu-item>Item 2</button>
+  </mat-menu>
+</mat-toolbar>

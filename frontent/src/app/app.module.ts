@@ -8,20 +8,37 @@ import {
   MatMenuModule, 
   MatCardModule,
   MatIconModule,
-  MatInputModule} from '@angular/material';
+  MatInputModule,
+  MatSnackBarModule} from '@angular/material';
 
 import { FormsModule } from '@angular/forms'
 import { HttpClientModule } from '@angular/common/http';
 import { WebService } from './services/web.service';
+import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { MessageBoardComponent } from './components/message-board/message-board.component';
 import { NewMessageComponent } from './components/new-message/new-message.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { HomeComponent } from './components/home/home.component';
+
+const routes = [
+  {
+    path: '',
+    component: HomeComponent
+  },
+  {
+    path: 'messages',
+    component: MessageBoardComponent
+  }
+];
 
 @NgModule({
   declarations: [
     AppComponent,
     MessageBoardComponent,
-    NewMessageComponent
+    NewMessageComponent,
+    NavbarComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +50,9 @@ import { NewMessageComponent } from './components/new-message/new-message.compon
     MatIconModule,
     HttpClientModule,
     FormsModule,
-    MatInputModule
+    MatInputModule,
+    MatSnackBarModule,
+    RouterModule.forRoot(routes)
   ],
   providers: [ WebService ],
   bootstrap: [AppComponent]
