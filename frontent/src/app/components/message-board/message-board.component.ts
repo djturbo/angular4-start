@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { WebService } from '../../services/web.service';
+import 'rxjs/add/operator/switchMap';
+import { Observable } from 'rxjs/Observable';
+
 @Component({
   selector: 'message-board',
   templateUrl: './message-board.component.html',
@@ -7,19 +11,30 @@ import { WebService } from '../../services/web.service';
 })
 export class MessageBoardComponent implements OnInit {
 
- 
-  constructor(private webService: WebService) { }
 
-  async ngOnInit() {
-    
-    console.log('calling getMessage on ngOnInit from MessageBoardComponent ...');
-    this.webService.getMessages(this.onSuccess, this.onError);
+  constructor(
+    private webService: WebService,
+    private route: ActivatedRoute) { }
+
+  ngOnInit() {
+    /* Observa por el parámetro name */
+    console.log("this.route.snapshot.params.name: ",this.route.snapshot.params.name);
+    this.route.paramMap.subscribe(
+      (parmas) => {
+        console.log("MessageBoardComponent :: name param: ", parmas.get('name'));
+        let user = parmas.get('name');
+        this.webService.getMessages(this.onSuccess, this.onError, user);
+      },
+      (err) => {
+        console.error(err);
+      });
+
   }
-  onSuccess = (data)=>{
-    console.log('onSuccess data: ',data);
+  onSuccess = (data) => {
+    console.log('onSuccess data: ', data);
     this.messages = data;
   }
-  onError = (error)=>{
+  onError = (error) => {
     console.log('onError error: ', error);
   }
   messages = [];

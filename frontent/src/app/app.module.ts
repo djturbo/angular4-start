@@ -26,8 +26,12 @@ const routes = [
     path: '',
     component: HomeComponent
   },
-  {
+  /*{
     path: 'messages',
+    component: MessageBoardComponent
+  },*/
+  {
+    path: 'messages/:name',
     component: MessageBoardComponent
   }
 ];

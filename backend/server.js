@@ -17,6 +17,12 @@ api.get('/messages', (req, res) => {
     res.json(messages);
 })
 
+api.get('/messages/:user', (req, res) => {
+    var user = req.params.user;
+    var result = messages.filter(message => message.owner === user);
+    res.json(result);
+})
+
 api.post('/message', (req, res) => {
     messages.push(req.body);
     //res.writeHead({'Content-Type': 'application/json'});
