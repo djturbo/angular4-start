@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'register',
@@ -8,7 +9,9 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class RegisterComponent implements OnInit {
   form;
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder, 
+    private authService: AuthService) {
     this.form = fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
@@ -25,6 +28,8 @@ export class RegisterComponent implements OnInit {
     console.log('form errors: ', this.form.errors);
     console.log("This form is valid: ", this.form.valid);
     console.log("onSubmit: ", this.form.value );
+    
+    this.authService.register(this.form.value);
   }
 
   isInvalidForm(control){

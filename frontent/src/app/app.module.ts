@@ -14,6 +14,7 @@ import {
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { HttpClientModule } from '@angular/common/http';
 import { WebService } from './services/web.service';
+import { AuthService } from './services/auth.service';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { MessageBoardComponent } from './components/message-board/message-board.component';
@@ -65,7 +66,9 @@ const routes = [
     MatSnackBarModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [ WebService ],
+  providers: [ 
+    WebService,
+    AuthService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
