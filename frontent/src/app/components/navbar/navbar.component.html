@@ -3,7 +3,10 @@
     <mat-icon>home</mat-icon>
     {{title}}</button>
 
-  <!-- This fills the remaining space of the current row -->
+    <button mat-button routerLink="/register">
+      <mat-icon>sign</mat-icon>Sign Up
+    </button>
+    <!-- This fills the remaining space of the current row -->
   <span class="fill-remaining-space"></span>
   <button mat-button [mat-menu-trigger-for]="menu" fxHide="false" fxHide.gt-sm>
     <mat-icon>menu</mat-icon>
