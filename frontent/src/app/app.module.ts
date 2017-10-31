@@ -9,7 +9,8 @@ import {
   MatCardModule,
   MatIconModule,
   MatInputModule,
-  MatSnackBarModule} from '@angular/material';
+  MatSnackBarModule,
+  MatToolbarModule} from '@angular/material';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { HttpClientModule } from '@angular/common/http';
@@ -22,6 +23,7 @@ import { NewMessageComponent } from './components/new-message/new-message.compon
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { RegisterComponent } from './components/register/register.component';
+import { LoginComponent } from './components/login/login.component';
 
 const routes = [
   {
@@ -39,6 +41,10 @@ const routes = [
   {
     path: 'register',
     component: RegisterComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   }
 ];
 
@@ -49,7 +55,8 @@ const routes = [
     NewMessageComponent,
     NavbarComponent,
     HomeComponent,
-    RegisterComponent
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +71,8 @@ const routes = [
     ReactiveFormsModule,
     MatInputModule,
     MatSnackBarModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    MatToolbarModule
   ],
   providers: [ 
     WebService,

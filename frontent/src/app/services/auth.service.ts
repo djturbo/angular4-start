@@ -23,15 +23,34 @@ export class AuthService {
   register = (user)=>{
     delete user['confirmPassword'];
     this.http.post(this.BASE_URL+ '/register', user).subscribe(res =>{
-      var authenticated = res;
-      if(!authenticated){
-        return;
-      }
-      localStorage.setItem(this.TOKEN_KEY, authenticated['result']);
-      localStorage.setItem(this.NAME_KEY, authenticated['firstName']);
-      this.router.navigate(['/']);
-      console.log('token: ', authenticated['result']);
-      console.log('name: ', authenticated['firstName']);
+      this.authenticate(res);
     });
+  }
+
+  logout = () =>{
+    localStorage.removeItem(this.TOKEN_KEY);
+    localStorage.removeItem(this.NAME_KEY);
+  }
+
+  login = (payload, onSuccess, onError) =>{
+    console.log("authService :: login :: payload: ", payload);
+    this.http.post(this.BASE_URL + '/login', payload).subscribe(res =>{
+      this.authenticate(res);
+      onSuccess(res);
+    }, err =>{
+      onError(err);
+    });
+  }
+
+  authenticate = (res) =>{
+    var authenticated = res;
+    if(!authenticated){
+      return;
+    }
+    localStorage.setItem(this.TOKEN_KEY, authenticated['result']);
+    localStorage.setItem(this.NAME_KEY, authenticated['firstName']);
+    this.router.navigate(['/']);
+    console.log('token: ', authenticated['result']);
+    console.log('name: ', authenticated['firstName']);
   }
 }

@@ -1,21 +1,29 @@
-<mat-toolbar role="toolbar" aria-label="FJAC" color="primary">
-  <button mat-button routerLink="/">
-    <mat-icon>home</mat-icon>
-    {{title}}</button>
-
-    <button mat-button routerLink="/register">
+<div class="navbar-component">
+  <mat-toolbar role="toolbar" aria-label="FJAC" color="primary">
+    <button mat-button routerLink="/">
+      <mat-icon>home</mat-icon>
+      {{title}}</button>
+    <span style="flex: 1 1 auto;"></span>
+    <button *ngIf="!authService.isAuthenticated" mat-button routerLink="/login">
+      <mat-icon>login</mat-icon>Log In
+    </button>
+    <button *ngIf="!authService.isAuthenticated" mat-button routerLink="/register">
       <mat-icon>sign</mat-icon>Sign Up
     </button>
-    <button *ngIf="authService.isAuthenticated" mat-button routerLink="/register">
+    <button *ngIf="authService.isAuthenticated" mat-button routerLink="/">
       <mat-icon>user</mat-icon>Welcome {{authService.name}}
     </button>
+    <button *ngIf="authService.isAuthenticated" mat-button (click)="authService.logout()">
+      <mat-icon>user</mat-icon>Log Out
+    </button>
     <!-- This fills the remaining space of the current row -->
-  <span class="fill-remaining-space"></span>
-  <button mat-button [mat-menu-trigger-for]="menu" fxHide="false" fxHide.gt-sm>
-    <mat-icon>menu</mat-icon>
-  </button>
-  <mat-menu #menu="matMenu">
-    <button mat-menu-item routerLink="/messages">Messages</button>
-    <button mat-menu-item>Item 2</button>
-  </mat-menu>
-</mat-toolbar>
+    <span class="fill-remaining-space"></span>
+    <button mat-button [mat-menu-trigger-for]="menu" fxHide="false" fxHide.gt-sm>
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button color="primary" mat-menu-item routerLink="/messages">Messages</button>
+      <button color="primary" mat-menu-item>Item 2</button>
+    </mat-menu>
+  </mat-toolbar>
+</div>
