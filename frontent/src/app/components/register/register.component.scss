@@ -1,4 +1,13 @@
 .register-component{
+    width: 100%;
+    .wrapper{
+        width: 340px;
+        margin: 10px auto;
+    }
+
+    input{
+        width: 80%;
+    }
     .error{
         background-color: #fff0f0
     }

@@ -1,6 +1,6 @@
 <div class="register-component">
   <mat-card>
-    <form [formGroup] = "form" (ngSubmit)="onSubmit()">
+    <form [formGroup] = "form" class="wrapper" (ngSubmit)="onSubmit()">
       <mat-card-content>
         <mat-form-field>
           <input matInput type="text" [ngClass]="{'error': isInvalidForm('firstName')}" placeholder="First Name" formControlName="firstName" />

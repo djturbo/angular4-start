@@ -40,7 +40,7 @@ auth.post('/register', (req, res) =>{
     user.id = index;
     
     var token = jwt.sign(user.id, '123');
-    res.status(200).json({result: token});
+    res.status(200).json({result: token, firstName: user.firstName});
 })
 
 app.use('/api', api);
