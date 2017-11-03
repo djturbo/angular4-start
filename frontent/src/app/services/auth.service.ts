@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpHeaders  } from '@angular/common/http';
+import { RequestOptions, Headers } from '@angular/http';
 import { Router } from '@angular/router';
 
 @Injectable()
@@ -20,6 +21,11 @@ export class AuthService {
     return !!localStorage.getItem(this.TOKEN_KEY);
   }
 
+  get tokenHeader(){
+    var headers = new HttpHeaders({'Authorization': 'Bearer '+localStorage.getItem(this.TOKEN_KEY)});
+    return headers;
+  }
+
   register = (user)=>{
     delete user['confirmPassword'];
     this.http.post(this.BASE_URL+ '/register', user).subscribe(res =>{
@@ -35,6 +41,9 @@ export class AuthService {
   login = (payload, onSuccess, onError) =>{
     console.log("authService :: login :: payload: ", payload);
     this.http.post(this.BASE_URL + '/login', payload).subscribe(res =>{
+      if(res['success'] !== undefined && res['success'] === false){
+          return false;
+      }
       this.authenticate(res);
       onSuccess(res);
     }, err =>{

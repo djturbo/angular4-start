@@ -30,8 +30,8 @@ export class LoginComponent implements OnInit {
   }
 
   login = ()=>{
-    if(this.form.isInvalidForm){
-      return;
+    if(this.form.isInvalidForm || !this.form.value.email || !this.form.value.password){
+      return false;
     }
     console.log("loginComponent :: login email: ", this.form.value.email);
     var payload = {email: this.form.value.email, password: this.form.value.password};

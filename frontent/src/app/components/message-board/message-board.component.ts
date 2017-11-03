@@ -16,6 +16,8 @@ export class MessageBoardComponent implements OnInit {
     private webService: WebService,
     private route: ActivatedRoute) { }
 
+    TAG = 'MessageBoardComponent';
+
   ngOnInit() {
     /* Observa por el parámetro name */
     console.log("this.route.snapshot.params.name: ",this.route.snapshot.params.name);
@@ -28,7 +30,11 @@ export class MessageBoardComponent implements OnInit {
       (err) => {
         console.error(err);
       });
-
+      this.webService.getUser().subscribe(user =>{
+        console.log(this.TAG, ' :: getUser ', user);
+      }, error =>{
+        console.log(this.TAG, ' :: getUser ',error);
+      });
   }
   onSuccess = (data) => {
     console.log('onSuccess data: ', data);

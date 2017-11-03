@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
+import { AuthService } from './auth.service';
+import { HttpHeaders } from '@angular/common/http';
+
 @Injectable()
 export class WebService {
   private messageStore : Object = [];
@@ -9,7 +12,7 @@ export class WebService {
 
   messages = this.messageSubject.asObservable();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authService: AuthService) { }
   BASE_URL = 'http://localhost:1234/api';
   getMessages(onSuccess, onError, user){
     user = (user) ? '/' +user : '';
@@ -36,5 +39,8 @@ export class WebService {
     });
   }
 
+  getUser = ()=>{
+    return this.http.get(this.BASE_URL + '/users/me', {headers: this.authService.tokenHeader});
+  }
 
 }

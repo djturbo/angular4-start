@@ -17,7 +17,7 @@ var users = [
 app.use(bodyParser.json());
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
     next();
 })
 
@@ -38,6 +38,24 @@ api.post('/message', (req, res) => {
     //res.writeHead({'Content-Type': 'application/json'});
     res.status(200).json({ result: messages });
 })
+
+api.get('/users/me', checkAuthenticatied, (req, res)=>{
+    console.log('/users/me user: ', req.user);
+    res.status(200).json(users[req.user -1]);
+})
+
+function checkAuthenticatied(req, res, next){
+    if(!req.header('Authorization')){
+        return res.status(401).json({message: 'Unauthorizated requested, Missing authentication header'});
+    }
+    var token = req.header('authorization').split(' ')[1];
+    var payload = jwt.decode(token, '123');
+    if(!payload){
+        return res.status(401).json({message: 'unauthorizated requested Authentication header invalid'});
+    }
+    req.user = payload;
+    next();
+}
 
 auth.post('/register', (req, res) => {
     console.log('register');
